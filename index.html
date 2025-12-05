@@ -122,6 +122,7 @@
       font-weight: 700;
       font-size: 1.2rem;
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .nav-links {
@@ -137,6 +138,7 @@
       transition: var(--transition);
       padding: 5px 10px;
       border-radius: 4px;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -181,6 +183,7 @@
       padding: 12px 15px;
       border-radius: 4px;
       transition: var(--transition);
+      text-align: center;
     }
 
     .mobile-nav a:hover {
@@ -203,6 +206,12 @@
       margin-top: 70px;
     }
 
+    @supports not (background-attachment: fixed) {
+      .hero {
+        background-attachment: scroll;
+      }
+    }
+
     .hero-content {
       text-align: center;
       max-width: 800px;
@@ -214,6 +223,7 @@
       font-size: 2.5rem;
       margin-bottom: 20px;
       color: var(--white);
+      line-height: 1.2;
     }
 
     .hero h2 {
@@ -221,6 +231,7 @@
       margin-bottom: 25px;
       color: var(--white);
       font-weight: 400;
+      line-height: 1.3;
     }
 
     .hero p {
@@ -242,6 +253,8 @@
       font-weight: 600;
       transition: var(--transition);
       box-shadow: 0 4px 15px var(--shadow);
+      border: none;
+      cursor: pointer;
     }
 
     .cta-button:hover {
@@ -310,6 +323,7 @@
       transition: var(--transition);
       text-align: center;
       border-top: 4px solid var(--primary-red);
+      height: 100%;
     }
 
     .service-card:hover {
@@ -360,6 +374,7 @@
       overflow: hidden;
       transition: var(--transition);
       position: relative;
+      aspect-ratio: 1;
     }
 
     .instagram-item:hover {
@@ -369,7 +384,7 @@
 
     .instagram-item img {
       width: 100%;
-      height: 200px;
+      height: 100%;
       object-fit: cover;
       display: block;
     }
@@ -434,13 +449,16 @@
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       min-width: 250px;
+      flex: 1;
     }
 
     .contact-icon {
       font-size: 1.5rem;
       color: var(--primary-red);
+      min-width: 30px;
     }
 
+   
     /* Footer */
     footer {
       background-image: url('imagens/chatimage.jpg');
@@ -502,9 +520,22 @@
     }
 
     /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.3rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .logo {
         font-size: 1rem;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .nav-links {
@@ -519,10 +550,11 @@
         min-height: 70vh;
         background-attachment: scroll;
         padding: 80px 0 40px;
+        margin-top: 60px;
       }
 
       .hero h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
 
       .hero h2 {
@@ -535,6 +567,7 @@
 
       .section-title {
         font-size: 1.5rem;
+        margin-bottom: 30px;
       }
 
       section {
@@ -556,23 +589,65 @@
       .contact-item {
         min-width: 100%;
       }
+      
+      .about-content {
+        padding: 25px;
+      }
+      
+      .service-card {
+        padding: 25px 20px;
+      }
     }
 
     @media (max-width: 480px) {
       .hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.1rem;
       }
 
       .service-card {
-        padding: 20px;
+        padding: 20px 15px;
       }
 
       .instagram-grid {
         grid-template-columns: 1fr;
+        max-width: 300px;
       }
 
       .footer-content {
         grid-template-columns: 1fr;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+      }
+      
+      .contact-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+      
+      .cta-button {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .logo {
+        font-size: 0.9rem;
+      }
+      
+      .hero h1 {
+        font-size: 1.4rem;
+      }
+      
+      .container {
+        padding: 0 15px;
       }
     }
   </style>
@@ -593,7 +668,7 @@
     <div class="container nav-inner">
       <a href="#hero" class="logo">Mãe Jéssica de Oyá Funiké</a>
       
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
         <i class="fas fa-bars"></i>
       </button>
       
@@ -608,11 +683,11 @@
     
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-      <a href="#hero" onclick="toggleMobileNav()">Início</a>
-      <a href="#about" onclick="toggleMobileNav()">Sobre</a>
-      <a href="#services" onclick="toggleMobileNav()">Serviços</a>
-      <a href="#instagram" onclick="toggleMobileNav()">Instagram</a>
-      <a href="#contact" onclick="toggleMobileNav()">Contato</a>
+      <a href="#hero">Início</a>
+      <a href="#about">Sobre</a>
+      <a href="#services">Serviços</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#contact">Contato</a>
     </div>
   </header>
 
@@ -668,43 +743,42 @@
     <div class="container">
       <h2 class="section-title instagram-title">Nosso Instagram</h2>
       <p style="margin-bottom: 40px; color: rgba(255,255,255,0.9); max-width: 600px; margin-left: auto; margin-right: auto;">
-        Acompanhe-nos no instagram!
+        Acompanhe nosso trabalho, depoimentos e conteúdos espirituais
       </p>
       
       <!-- Instagram Gallery Placeholder -->
       <div class="instagram-grid">
-        <!-- These are placeholder images - replace with actual Instagram embed or images -->
         <div class="instagram-item">
-          <img src="https://https://www.instagram.com/p/DFG-kGOM5Ww/?img_index=1" alt="Mãe Jéssica" loading="lazy">
+          <img src="imagens/maejessica.jpg" alt="Mãe Jéssica" loading="lazy">
           <div class="instagram-overlay">
-            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
               <i class="fab fa-instagram"></i>
             </a>
           </div>
         </div>
         
         <div class="instagram-item">
-          <img src="https://www.instagram.com/p/DPq_ai8DXQY/" alt="Batuque 2025" loading="lazy">
+          <img src="imagens/batuqueoya2025.jpg" alt="Batuque mãe Oya 2025" loading="lazy">
           <div class="instagram-overlay">
-            <a href="https://www.instagram.com" class="instagram-link" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
               <i class="fab fa-instagram"></i>
             </a>
           </div>
         </div>
         
         <div class="instagram-item">
-          <img src="https://https://www.instagram.com/p/DOGm_JHjW2v/" alt="Ambiente espiritual" loading="lazy">
+          <img src="imagens/oya.jpg" alt="Ambiente espiritual" loading="lazy">
           <div class="instagram-overlay">
-            <a href="https://www.instagram.com" class="instagram-link" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
               <i class="fab fa-instagram"></i>
             </a>
           </div>
         </div>
         
         <div class="instagram-item">
-          <img src="https:https://www.instagram.com/p/DFdoRdRS4-n/" alt="Batuque Mãe oyá 2025" loading="lazy">
+          <img src="imagens/setesaias.jpg" alt="sete saias" loading="lazy">
           <div class="instagram-overlay">
-            <a href="https://www.instagram.com" class="instagram-link" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
               <i class="fab fa-instagram"></i>
             </a>
           </div>
@@ -781,7 +855,6 @@
             <a href="https://www.instagram.com/maejessica.deoya/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <i class="fab fa-instagram"></i>
             </a>
-
           </div>
         </div>
       </div>
@@ -795,46 +868,59 @@
 
   <script>
     // Mobile Navigation Toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    
     function toggleMobileNav() {
-      const mobileNav = document.getElementById('mobileNav');
+      const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !isExpanded);
       mobileNav.classList.toggle('active');
+      
+      // Change icon
+      const icon = hamburger.querySelector('i');
+      if (mobileNav.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
     }
+
+    // Toggle mobile nav with hamburger button
+    hamburger.addEventListener('click', function(event) {
+      event.stopPropagation();
+      toggleMobileNav();
+    });
 
     // Close mobile nav when clicking outside
     document.addEventListener('click', function(event) {
-      const mobileNav = document.getElementById('mobileNav');
-      const hamburger = document.getElementById('hamburger');
-      
       if (mobileNav.classList.contains('active') && 
           !mobileNav.contains(event.target) && 
           !hamburger.contains(event.target)) {
-        mobileNav.classList.remove('active');
+        toggleMobileNav();
       }
-    });
-
-    // Toggle mobile nav with hamburger button
-    document.getElementById('hamburger').addEventListener('click', function(event) {
-      event.stopPropagation();
-      toggleMobileNav();
     });
 
     // Close mobile nav when clicking on a link
     document.querySelectorAll('.mobile-nav a').forEach(link => {
       link.addEventListener('click', () => {
-        toggleMobileNav();
+        if (mobileNav.classList.contains('active')) {
+          toggleMobileNav();
+        }
       });
     });
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
+          e.preventDefault();
+          
           // Calculate position with offset for fixed header
           const headerHeight = document.querySelector('.navbar').offsetHeight;
           const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
@@ -866,15 +952,37 @@
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               const img = entry.target;
-              img.src = img.src;
+              // Only load if src is not already set (for placeholder images)
+              if (img.dataset.src) {
+                img.src = img.dataset.src;
+              }
+              img.classList.add('loaded');
               imageObserver.unobserve(img);
             }
           });
+        }, {
+          rootMargin: '50px 0px',
+          threshold: 0.1
         });
         
         lazyImages.forEach(img => imageObserver.observe(img));
+      } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => {
+          img.src = img.src;
+        });
       }
     });
+
+    // Fix for iOS viewport height issue
+    function setVH() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
   </script>
 </body>
 </html>
