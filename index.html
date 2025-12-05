@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mãe Jéssica de Oyá Funiké - Atendimento Espiritual</title>
+  <meta name="description" content="Mãe Jéssica de Oyá Funiké - Atendimento espiritual com búzios e cartas. Trabalhos espirituais para todos os fins em Passo Fundo - RS.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="theme-color" content="#b30000">
+
+  <style>
+    :root {
+      --primary-red: #b30000;
+      --dark-red: #800000;
+      --light-red: #ff3333;
+      --white: #ffffff;
+      --off-white: #f8f8f8;
+      --black: #000000;
+      --gray: #333333;
+      --light-gray: #666666;
+      --shadow: rgba(179, 0, 0, 0.15);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Verdana, sans-serif;
+      background-color: var(--white);
+      color: var(--gray);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      transition: var(--transition);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Mobile WhatsApp Button */
+    .whatsapp-mobile {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
+      color: var(--white);
+      padding: 15px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 15px var(--shadow);
+      z-index: 1000;
+      width: 90%;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: var(--white);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--primary-red);
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+      background-color: rgba(179, 0, 0, 0.05);
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary-red);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background-color: var(--white);
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      gap: 15px;
+      z-index: 999;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: var(--gray);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 15px;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .mobile-nav a:hover {
+      color: var(--primary-red);
+      background-color: rgba(179, 0, 0, 0.05);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('imagens/logoreinodeoya.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--white);
+      padding: 100px 0 60px;
+      margin-top: 70px;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .hero h2 {
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
+      color: var(--white);
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px var(--shadow);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(179, 0, 0, 0.3);
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      color: var(--primary-red);
+      font-size: 2rem;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary-red);
+    }
+
+    /* About Section */
+    .about {
+      background-color: var(--off-white);
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px;
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .about-content p {
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: var(--light-gray);
+    }
+
+    /* Services Section */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .service-card {
+      background-color: var(--white);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      text-align: center;
+      border-top: 4px solid var(--primary-red);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(179, 0, 0, 0.1);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--primary-red);
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      color: var(--primary-red);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    /* Instagram Section */
+    .instagram-section {
+      background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+      padding: 80px 0;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .instagram-title {
+      color: var(--white);
+      margin-bottom: 30px;
+    }
+
+    .instagram-title::after {
+      background-color: var(--white);
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .instagram-item {
+      background-color: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .instagram-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .instagram-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .instagram-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(179, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .instagram-item:hover .instagram-overlay {
+      opacity: 1;
+    }
+
+    .instagram-link {
+      color: var(--white);
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .instagram-cta {
+      margin-top: 40px;
+    }
+
+    .instagram-cta .cta-button {
+      background: var(--white);
+      color: var(--primary-red);
+    }
+
+    .instagram-cta .cta-button:hover {
+      background: var(--off-white);
+    }
+
+    /* Contact Section */
+    .contact {
+      text-align: center;
+      background-color: var(--off-white);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      min-width: 250px;
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary-red);
+    }
+
+    /* Footer */
+    footer {
+      background-image: url('imagens/chatimage.jpg');
+      color: var(--white);
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      color: var(--white);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-section p {
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      border-radius: 50%;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      background-color: var(--primary-red);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero {
+        min-height: 70vh;
+        background-attachment: scroll;
+        padding: 80px 0 40px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero h2 {
+        font-size: 1.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .whatsapp-float {
+        display: none;
+      }
+
+      .whatsapp-mobile {
+        display: block;
+      }
+
+      .instagram-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-item {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .service-card {
+        padding: 20px;
+      }
+
+      .instagram-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/5554999981834" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Mobile WhatsApp Button -->
+  <a href="https://wa.me/5554999981834" class="whatsapp-mobile" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-whatsapp"></i> Agendar Consulta
+  </a>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="logo">Mãe Jéssica de Oyá Funiké</a>
+      
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-links">
+        <li><a href="#hero">Início</a></li>
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#services">Serviços</a></li>
+        <li><a href="#instagram">Instagram</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#hero" onclick="toggleMobileNav()">Início</a>
+      <a href="#about" onclick="toggleMobileNav()">Sobre</a>
+      <a href="#services" onclick="toggleMobileNav()">Serviços</a>
+      <a href="#instagram" onclick="toggleMobileNav()">Instagram</a>
+      <a href="#contact" onclick="toggleMobileNav()">Contato</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container hero-content">
+      <h1>Mãe Jéssica de <span style="color: #ff3333">Oyá Funiké</span></h1>
+      <h2>Atendimento Espiritual • Búzios • Cartas</h2>
+      <p>Conectando você ao mundo espiritual com sabedoria e respeito às tradições. Atendimento com ética, sigilo e acolhimento em Passo Fundo - RS.</p>
+      <a href="https://wa.me/5554999981834" class="cta-button" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i> Agendar Consulta
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">Sobre a Mãe Jéssica</h2>
+      <div class="about-content">
+        <p>Com anos de dedicação aos estudos espirituais, Mãe Jéssica realiza atendimentos com búzios, oferecendo orientação e clareza para quem busca respostas sobre amor, saúde e prosperidade. Sua conexão com Oyá traz energia transformadora para momentos de mudança e renovação.</p>
+        <p>Atendimento realizado com ética, respeito e sigilo absoluto em <strong>Passo Fundo • RS</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <div class="container">
+      <h2 class="section-title">Serviços Espirituais</h2>
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-water"></i>
+          </div>
+          <h3>Jogo de Búzios</h3>
+          <p>Consulta tradicional que conecta com os orixás, oferecendo respostas sobre amor, trabalho e caminhos espirituais.</p>
+        </article>
+      
+        <article class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-star-and-crescent"></i>
+          </div>
+          <h3>Trabalhos Espirituais</h3>
+          <p>Realização de trabalhos com fundamento e respeito às tradições, priorizando o bem-estar e proteção energética.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram Section -->
+  <section id="instagram" class="instagram-section">
+    <div class="container">
+      <h2 class="section-title instagram-title">Nosso Instagram</h2>
+      <p style="margin-bottom: 40px; color: rgba(255,255,255,0.9); max-width: 600px; margin-left: auto; margin-right: auto;">
+        Acompanhe-nos no instagram!
+      </p>
+      
+      <!-- Instagram Gallery Placeholder -->
+      <div class="instagram-grid">
+        <!-- These are placeholder images - replace with actual Instagram embed or images -->
+        <div class="instagram-item">
+          <img src="https://https://www.instagram.com/p/DFG-kGOM5Ww/?img_index=1" alt="Mãe Jéssica" loading="lazy">
+          <div class="instagram-overlay">
+            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="instagram-item">
+          <img src="https://www.instagram.com/p/DPq_ai8DXQY/" alt="Batuque 2025" loading="lazy">
+          <div class="instagram-overlay">
+            <a href="https://www.instagram.com" class="instagram-link" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="instagram-item">
+          <img src="https://https://www.instagram.com/p/DOGm_JHjW2v/" alt="Ambiente espiritual" loading="lazy">
+          <div class="instagram-overlay">
+            <a href="https://www.instagram.com" class="instagram-link" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="instagram-item">
+          <img src="https:https://www.instagram.com/p/DFdoRdRS4-n/" alt="Batuque Mãe oyá 2025" loading="lazy">
+          <div class="instagram-overlay">
+            <a href="https://www.instagram.com" class="instagram-link" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instagram-cta">
+        <a href="https://www.instagram.com/maejessica.deoya/" class="cta-button" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram"></i> Siga nosso Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title">Entre em Contato</h2>
+      <p style="max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">
+        Não deixe que as dúvidas impeçam seu crescimento espiritual. Orixá te mostra o caminho.
+      </p>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div>
+            <h3>Localização</h3>
+            <p>Rua Ismael de Quadros, 359. Passo Fundo - RS</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div>
+            <h3>WhatsApp</h3>
+            <p>(54) 99998-1834</p>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 40px;">
+        <a href="https://wa.me/5554999981834" class="cta-button" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-whatsapp"></i> Falar Diretamente no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Mãe Jéssica de Oyá Funiké</h3>
+          <p>Atendimento espiritual com ética e respeito às tradições. Conectando você ao mundo espiritual com sabedoria.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Horário de Atendimento</h3>
+          <p>Segunda a Sábado: 9h às 18h</p>
+          <p>Domingo: Atendimento com hora marcada</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Siga-nos</h3>
+          <div class="social-links">
+            <a href="https://wa.me/5554999981834" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/maejessica.deoya/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>© 2025 Mãe Jéssica de Oyá Funiké - Todos os direitos reservados</p>
+        <p>Desenvolvido com fé e dedicação</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Navigation Toggle
+    function toggleMobileNav() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+    }
+
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileNav = document.getElementById('mobileNav');
+      const hamburger = document.getElementById('hamburger');
+      
+      if (mobileNav.classList.contains('active') && 
+          !mobileNav.contains(event.target) && 
+          !hamburger.contains(event.target)) {
+        mobileNav.classList.remove('active');
+      }
+    });
+
+    // Toggle mobile nav with hamburger button
+    document.getElementById('hamburger').addEventListener('click', function(event) {
+      event.stopPropagation();
+      toggleMobileNav();
+    });
+
+    // Close mobile nav when clicking on a link
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMobileNav();
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // Calculate position with offset for fixed header
+          const headerHeight = document.querySelector('.navbar').offsetHeight;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Sticky header on scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 100) {
+        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+      }
+    });
+
+    // Lazy load images
+    document.addEventListener('DOMContentLoaded', function() {
+      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.src;
+              imageObserver.unobserve(img);
+            }
+          });
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+      }
+    });
+  </script>
+</body>
+</html>
