@@ -158,7 +158,7 @@
       z-index: 1001;
     }
 
-    /* Mobile Navigation - REESTRUTURADO */
+    /* Mobile Navigation */
     .mobile-nav {
       position: fixed;
       top: 0;
@@ -610,7 +610,6 @@
         padding: 25px 20px;
       }
       
-      /* Ajustes do menu móvel para mobile */
       .mobile-nav a {
         font-size: 1.3rem;
         padding: 12px 0;
@@ -686,7 +685,7 @@
     <div class="container nav-inner">
       <a href="#hero" class="logo">Mãe Jéssica de Oyá Funiké</a>
       
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <button class="hamburger" id="hamburger" type="button" aria-label="Menu" aria-expanded="false">
         <i class="fas fa-bars"></i>
       </button>
       
@@ -764,7 +763,6 @@
         Acompanhe nosso trabalho, depoimentos e conteúdos!
       </p>
       
-      <!-- Instagram Gallery Placeholder -->
       <div class="instagram-grid">
         <div class="instagram-item">
           <img src="imagens/maejessica.jpg" alt="Mãe Jéssica" loading="lazy">
@@ -877,7 +875,8 @@
       </div>
     </div>
   </footer>
-  <!-- ----------------- SCRIPT UNIFICADO E SEGURO ----------------- -->
+
+  <!-- SCRIPT UNIFICADO E SEGURO -->
   <script>
   document.addEventListener("DOMContentLoaded", () => {
     const hamburger = document.getElementById("hamburger");
@@ -898,7 +897,6 @@
         icon.classList.remove("fa-bars");
         icon.classList.add("fa-times");
       }
-      // foco acessível
       if (links[0]) links[0].focus();
     }
 
@@ -915,23 +913,23 @@
       hamburger.focus();
     }
 
+    // torna disponível para onclick="closeMenu()" no HTML
+    window.closeMenu = closeMenu;
+
     function toggleMenu(e) {
       e && e.stopPropagation();
       if (mobileNav.classList.contains("active")) closeMenu();
       else openMenu();
     }
 
-    // eventos principais
     hamburger.addEventListener("click", toggleMenu);
 
     links.forEach(link => {
       link.addEventListener("click", () => {
-        // fecha com um pequeno delay para permitir navegação suave
         setTimeout(closeMenu, 120);
       });
     });
 
-    // fecha ao clicar fora
     document.addEventListener("click", (e) => {
       if (mobileNav.classList.contains("active") &&
           !mobileNav.contains(e.target) &&
@@ -940,14 +938,12 @@
       }
     });
 
-    // fecha com ESC
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && mobileNav.classList.contains("active")) {
         closeMenu();
       }
     });
 
-    // Smooth scroll com compensação do header fixo
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener("click", function(ev) {
         const targetId = this.getAttribute("href");
@@ -962,17 +958,14 @@
       });
     });
 
-    // iOS overscroll guard (optional)
     mobileNav.addEventListener('touchmove', (e) => {
       if (mobileNav.classList.contains('active')) {
         e.stopPropagation();
       }
     }, { passive: false });
 
-    // handle orientation/resize to ensure body overflow restored if needed
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768 && mobileNav.classList.contains('active')) {
-        // opcional: fechar menu em resize para desktop
         closeMenu();
       }
     });
@@ -980,5 +973,3 @@
   </script>
 </body>
 </html>
-
-
