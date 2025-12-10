@@ -877,45 +877,108 @@
       </div>
     </div>
   </footer>
-
+  <!-- ----------------- SCRIPT UNIFICADO E SEGURO ----------------- -->
   <script>
-    <script>
-  const hamburger = document.getElementById("hamburger");
-  const mobileNav = document.getElementById("mobileNav");
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const mobileNav = document.getElementById("mobileNav");
+    const body = document.body;
 
-  // Abrir e fechar o menu
-  hamburger.addEventListener("click", function () {
-    mobileNav.classList.toggle("active");
+    if (!hamburger || !mobileNav) return;
 
-    // Troca o ícone entre bars e x
-    const icon = this.querySelector("i");
-    if (mobileNav.classList.contains("active")) {
-      icon.classList.remove("fa-bars");
-      icon.classList.add("fa-times");
-      this.setAttribute("aria-expanded", "true");
-    } else {
-      icon.classList.remove("fa-times");
-      icon.classList.add("fa-bars");
-      this.setAttribute("aria-expanded", "false");
+    const links = mobileNav.querySelectorAll("a");
+
+    function openMenu() {
+      mobileNav.classList.add("active");
+      body.classList.add("menu-open");
+      hamburger.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+      const icon = hamburger.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+      }
+      // foco acessível
+      if (links[0]) links[0].focus();
     }
+
+    function closeMenu() {
+      mobileNav.classList.remove("active");
+      body.classList.remove("menu-open");
+      hamburger.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "auto";
+      const icon = hamburger.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
+      }
+      hamburger.focus();
+    }
+
+    function toggleMenu(e) {
+      e && e.stopPropagation();
+      if (mobileNav.classList.contains("active")) closeMenu();
+      else openMenu();
+    }
+
+    // eventos principais
+    hamburger.addEventListener("click", toggleMenu);
+
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        // fecha com um pequeno delay para permitir navegação suave
+        setTimeout(closeMenu, 120);
+      });
+    });
+
+    // fecha ao clicar fora
+    document.addEventListener("click", (e) => {
+      if (mobileNav.classList.contains("active") &&
+          !mobileNav.contains(e.target) &&
+          !hamburger.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // fecha com ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mobileNav.classList.contains("active")) {
+        closeMenu();
+      }
+    });
+
+    // Smooth scroll com compensação do header fixo
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function(ev) {
+        const targetId = this.getAttribute("href");
+        if (!targetId || targetId === "#") return;
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          ev.preventDefault();
+          const headerHeight = document.querySelector('.navbar')?.offsetHeight || 80;
+          const topPos = targetEl.getBoundingClientRect().top + window.scrollY - headerHeight;
+          window.scrollTo({ top: topPos, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // iOS overscroll guard (optional)
+    mobileNav.addEventListener('touchmove', (e) => {
+      if (mobileNav.classList.contains('active')) {
+        e.stopPropagation();
+      }
+    }, { passive: false });
+
+    // handle orientation/resize to ensure body overflow restored if needed
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && mobileNav.classList.contains('active')) {
+        // opcional: fechar menu em resize para desktop
+        closeMenu();
+      }
+    });
   });
-
-  // Fechar menu ao clicar em um link
-  function closeMenu() {
-    mobileNav.classList.remove("active");
-
-    const icon = hamburger.querySelector("i");
-    icon.classList.remove("fa-times");
-    icon.classList.add("fa-bars");
-
-    hamburger.setAttribute("aria-expanded", "false");
-  }
-  // Garantir que o código execute mesmo se houver erros
-  window.onerror = function() {
-    console.log('Erro detectado, mas continuando execução...');
-    return true;
-  };
   </script>
 </body>
 </html>
+
 
