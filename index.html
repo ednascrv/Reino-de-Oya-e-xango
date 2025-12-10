@@ -47,7 +47,7 @@
       padding: 0 20px;
     }
 
-    /* WhatsApp Floating Button */
+    /* WhatsApp Floating Button - APENAS ÍCONE */
     .whatsapp-float {
       position: fixed;
       bottom: 25px;
@@ -79,24 +79,32 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Mobile WhatsApp Button */
+    /* Mobile WhatsApp Button - TAMBÉM APENAS ÍCONE */
     .whatsapp-mobile {
       display: none;
       position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
       color: var(--white);
-      padding: 15px 25px;
-      border-radius: 50px;
+      border-radius: 50%;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: 0 4px 15px var(--shadow);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
       z-index: 1000;
-      width: 90%;
-      max-width: 300px;
       text-align: center;
+      line-height: 60px;
+      font-size: 28px;
+      animation: float 3s ease-in-out infinite;
+      transition: var(--transition);
+    }
+
+    .whatsapp-mobile:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
     }
 
     /* Navbar */
@@ -579,7 +587,9 @@
       }
 
       .whatsapp-mobile {
-        display: block;
+        display: flex; /* Alterado de block para flex para centralizar o ícone */
+        align-items: center;
+        justify-content: center;
       }
 
       .instagram-grid {
@@ -635,6 +645,16 @@
         padding: 12px 25px;
         font-size: 0.9rem;
       }
+      
+      /* Ajustar tamanho do botão WhatsApp no mobile */
+      .whatsapp-mobile {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 24px;
+        bottom: 20px;
+        right: 20px;
+      }
     }
     
     @media (max-width: 360px) {
@@ -653,14 +673,14 @@
   </style>
 </head>
 <body>
-  <!-- WhatsApp Floating Button -->
+  <!-- WhatsApp Floating Button - APENAS ÍCONE -->
   <a href="https://wa.me/5554999981834" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- Mobile WhatsApp Button -->
-  <a href="https://wa.me/5554999981834" class="whatsapp-mobile" target="_blank" rel="noopener noreferrer">
-    <i class="fab fa-whatsapp"></i> Agendar Consulta
+  <!-- Mobile WhatsApp Button - AGORA TAMBÉM APENAS ÍCONE -->
+  <a href="https://wa.me/5554999981834" class="whatsapp-mobile" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp">
+    <i class="fab fa-whatsapp"></i>
   </a>
 
   <!-- Navbar -->
@@ -896,34 +916,60 @@
       }
     });
 
-    // Close mobile nav when clicking on a link
+    // Smooth scroll function
+    function smoothScrollTo(targetId) {
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        // Calculate position with offset for fixed header
+        const headerHeight = document.querySelector('.navbar').offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Close mobile nav when clicking on a link - CORRIGIDO
     document.querySelectorAll('.mobile-nav a').forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevenir comportamento padrão
+        const targetId = this.getAttribute('href');
+        
         if (mobileNav.classList.contains('active')) {
           toggleMobileNav();
         }
+        
+        // Usar setTimeout para garantir que o menu feche antes do scroll
+        setTimeout(() => {
+          smoothScrollTo(targetId);
+        }, 300); // Tempo igual à transição CSS (0.3s)
       });
     });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+    // Smooth scroll for desktop navigation links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
         const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          e.preventDefault();
-          
-          // Calculate position with offset for fixed header
-          const headerHeight = document.querySelector('.navbar').offsetHeight;
-          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
+        smoothScrollTo(targetId);
+      });
+    });
+
+    // Smooth scroll for logo
+    document.querySelector('.logo').addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      smoothScrollTo(targetId);
+    });
+
+    // Smooth scroll for anchor links in hero section CTA (se houver)
+    document.querySelectorAll('a.cta-button[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        smoothScrollTo(targetId);
       });
     });
 
@@ -980,4 +1026,3 @@
   </script>
 </body>
 </html>
-
