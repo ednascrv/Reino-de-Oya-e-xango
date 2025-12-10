@@ -683,6 +683,7 @@
     <i class="fab fa-whatsapp"></i>
   </a>
 
+  <!-- O resto do código permanece exatamente igual -->
   <!-- Navbar -->
   <header class="navbar">
     <div class="container nav-inner">
@@ -916,60 +917,34 @@
       }
     });
 
-    // Smooth scroll function
-    function smoothScrollTo(targetId) {
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        // Calculate position with offset for fixed header
-        const headerHeight = document.querySelector('.navbar').offsetHeight;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-
-    // Close mobile nav when clicking on a link - CORRIGIDO
+    // Close mobile nav when clicking on a link
     document.querySelectorAll('.mobile-nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevenir comportamento padrão
-        const targetId = this.getAttribute('href');
-        
+      link.addEventListener('click', () => {
         if (mobileNav.classList.contains('active')) {
           toggleMobileNav();
         }
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
         
-        // Usar setTimeout para garantir que o menu feche antes do scroll
-        setTimeout(() => {
-          smoothScrollTo(targetId);
-        }, 300); // Tempo igual à transição CSS (0.3s)
-      });
-    });
-
-    // Smooth scroll for desktop navigation links
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        smoothScrollTo(targetId);
-      });
-    });
-
-    // Smooth scroll for logo
-    document.querySelector('.logo').addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      smoothScrollTo(targetId);
-    });
-
-    // Smooth scroll for anchor links in hero section CTA (se houver)
-    document.querySelectorAll('a.cta-button[href^="#"]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        smoothScrollTo(targetId);
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          
+          // Calculate position with offset for fixed header
+          const headerHeight = document.querySelector('.navbar').offsetHeight;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
       });
     });
 
