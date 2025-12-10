@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mãe Jéssica de Oyá Funiké - Atendimento Espiritual</title>
-  <meta name="description" content="Mãe Jéssica de Oyá Funiké - Atendimento espiritual com búzios. Trabalhos espirituais para todos os fins em Passo Fundo - RS.">
+  <meta name="description" content="Mãe Jéssica de Oyá Funiké - Atendimento espiritual com búzios e cartas. Trabalhos espirituais para todos os fins em Passo Fundo - RS.">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -47,7 +47,7 @@
       padding: 0 20px;
     }
 
-    /* WhatsApp Floating Button - APENAS ÍCONE */
+    /* WhatsApp Floating Button */
     .whatsapp-float {
       position: fixed;
       bottom: 25px;
@@ -79,32 +79,24 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Mobile WhatsApp Button - TAMBÉM APENAS ÍCONE */
+    /* Mobile WhatsApp Button */
     .whatsapp-mobile {
       display: none;
       position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 60px;
-      height: 60px;
-      background-color: #25D366;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
       color: var(--white);
-      border-radius: 50%;
+      padding: 15px 25px;
+      border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      box-shadow: 0 4px 15px var(--shadow);
       z-index: 1000;
+      width: 90%;
+      max-width: 300px;
       text-align: center;
-      line-height: 60px;
-      font-size: 28px;
-      animation: float 3s ease-in-out infinite;
-      transition: var(--transition);
-    }
-
-    .whatsapp-mobile:hover {
-      background-color: #128C7E;
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
     }
 
     /* Navbar */
@@ -163,40 +155,53 @@
       font-size: 24px;
       cursor: pointer;
       padding: 5px;
+      z-index: 1001;
     }
 
-    /* Mobile Navigation */
+    /* Mobile Navigation - REESTRUTURADO */
     .mobile-nav {
-      display: none;
       position: fixed;
-      top: 70px;
+      top: 0;
       left: 0;
       width: 100%;
-      background-color: var(--white);
-      padding: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      flex-direction: column;
-      gap: 15px;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
       z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      padding: 20px;
     }
 
     .mobile-nav.active {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
     }
 
     .mobile-nav a {
-      color: var(--gray);
+      color: var(--white);
       text-decoration: none;
       font-weight: 600;
-      padding: 12px 15px;
-      border-radius: 4px;
-      transition: var(--transition);
+      font-size: 1.5rem;
+      padding: 15px 0;
+      margin: 10px 0;
       text-align: center;
+      width: 100%;
+      max-width: 300px;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
     }
 
     .mobile-nav a:hover {
       color: var(--primary-red);
-      background-color: rgba(179, 0, 0, 0.05);
     }
 
     /* Hero Section */
@@ -466,7 +471,6 @@
       min-width: 30px;
     }
 
-   
     /* Footer */
     footer {
       background-image: url('imagens/chatimage.jpg');
@@ -587,9 +591,7 @@
       }
 
       .whatsapp-mobile {
-        display: flex; /* Alterado de block para flex para centralizar o ícone */
-        align-items: center;
-        justify-content: center;
+        display: block;
       }
 
       .instagram-grid {
@@ -606,6 +608,12 @@
       
       .service-card {
         padding: 25px 20px;
+      }
+      
+      /* Ajustes do menu móvel para mobile */
+      .mobile-nav a {
+        font-size: 1.3rem;
+        padding: 12px 0;
       }
     }
 
@@ -645,16 +653,6 @@
         padding: 12px 25px;
         font-size: 0.9rem;
       }
-      
-      /* Ajustar tamanho do botão WhatsApp no mobile */
-      .whatsapp-mobile {
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        font-size: 24px;
-        bottom: 20px;
-        right: 20px;
-      }
     }
     
     @media (max-width: 360px) {
@@ -673,17 +671,16 @@
   </style>
 </head>
 <body>
-  <!-- WhatsApp Floating Button - APENAS ÍCONE -->
+  <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/5554999981834" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- Mobile WhatsApp Button - AGORA TAMBÉM APENAS ÍCONE -->
-  <a href="https://wa.me/5554999981834" class="whatsapp-mobile" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp">
-    <i class="fab fa-whatsapp"></i>
+  <!-- Mobile WhatsApp Button -->
+  <a href="https://wa.me/5554999981834" class="whatsapp-mobile" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-whatsapp"></i> Agendar Consulta
   </a>
 
-  <!-- O resto do código permanece exatamente igual -->
   <!-- Navbar -->
   <header class="navbar">
     <div class="container nav-inner">
@@ -704,11 +701,11 @@
     
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-      <a href="#hero">Início</a>
-      <a href="#about">Sobre</a>
-      <a href="#services">Serviços</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#contact">Contato</a>
+      <a href="#hero" onclick="closeMenu()">Início</a>
+      <a href="#about" onclick="closeMenu()">Sobre</a>
+      <a href="#services" onclick="closeMenu()">Serviços</a>
+      <a href="#instagram" onclick="closeMenu()">Instagram</a>
+      <a href="#contact" onclick="closeMenu()">Contato</a>
     </div>
   </header>
 
@@ -716,7 +713,7 @@
   <section id="hero" class="hero">
     <div class="container hero-content">
       <h1>Mãe Jéssica de <span style="color: #ff3333">Oyá Funiké</span></h1>
-      <h2>Atendimento Espiritual • Búzios </h2>
+      <h2>Atendimento Espiritual • Búzios • Cartas</h2>
       <p>Conectando você ao mundo espiritual com sabedoria e respeito às tradições. Atendimento com ética, sigilo e acolhimento em Passo Fundo - RS.</p>
       <a href="https://wa.me/5554999981834" class="cta-button" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i> Agendar Consulta
@@ -764,7 +761,7 @@
     <div class="container">
       <h2 class="section-title instagram-title">Nosso Instagram</h2>
       <p style="margin-bottom: 40px; color: rgba(255,255,255,0.9); max-width: 600px; margin-left: auto; margin-right: auto;">
-        Acompanhe nosso trabalho, depoimentos e conteúdos!
+        Acompanhe nosso trabalho, depoimentos e conteúdos espirituais
       </p>
       
       <!-- Instagram Gallery Placeholder -->
@@ -882,122 +879,42 @@
   </footer>
 
   <script>
-    // Mobile Navigation Toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    
-    function toggleMobileNav() {
-      const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', !isExpanded);
-      mobileNav.classList.toggle('active');
-      
-      // Change icon
-      const icon = hamburger.querySelector('i');
-      if (mobileNav.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
+    <script>
+  const hamburger = document.getElementById("hamburger");
+  const mobileNav = document.getElementById("mobileNav");
+
+  // Abrir e fechar o menu
+  hamburger.addEventListener("click", function () {
+    mobileNav.classList.toggle("active");
+
+    // Troca o ícone entre bars e x
+    const icon = this.querySelector("i");
+    if (mobileNav.classList.contains("active")) {
+      icon.classList.remove("fa-bars");
+      icon.classList.add("fa-times");
+      this.setAttribute("aria-expanded", "true");
+    } else {
+      icon.classList.remove("fa-times");
+      icon.classList.add("fa-bars");
+      this.setAttribute("aria-expanded", "false");
     }
+  });
 
-    // Toggle mobile nav with hamburger button
-    hamburger.addEventListener('click', function(event) {
-      event.stopPropagation();
-      toggleMobileNav();
-    });
+  // Fechar menu ao clicar em um link
+  function closeMenu() {
+    mobileNav.classList.remove("active");
 
-    // Close mobile nav when clicking outside
-    document.addEventListener('click', function(event) {
-      if (mobileNav.classList.contains('active') && 
-          !mobileNav.contains(event.target) && 
-          !hamburger.contains(event.target)) {
-        toggleMobileNav();
-      }
-    });
+    const icon = hamburger.querySelector("i");
+    icon.classList.remove("fa-times");
+    icon.classList.add("fa-bars");
 
-    // Close mobile nav when clicking on a link
-    document.querySelectorAll('.mobile-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (mobileNav.classList.contains('active')) {
-          toggleMobileNav();
-        }
-      });
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          e.preventDefault();
-          
-          // Calculate position with offset for fixed header
-          const headerHeight = document.querySelector('.navbar').offsetHeight;
-          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    // Sticky header on scroll
-    window.addEventListener('scroll', function() {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 100) {
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-      } else {
-        navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
-      }
-    });
-
-    // Lazy load images
-    document.addEventListener('DOMContentLoaded', function() {
-      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-      
-      if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              // Only load if src is not already set (for placeholder images)
-              if (img.dataset.src) {
-                img.src = img.dataset.src;
-              }
-              img.classList.add('loaded');
-              imageObserver.unobserve(img);
-            }
-          });
-        }, {
-          rootMargin: '50px 0px',
-          threshold: 0.1
-        });
-        
-        lazyImages.forEach(img => imageObserver.observe(img));
-      } else {
-        // Fallback for older browsers
-        lazyImages.forEach(img => {
-          img.src = img.src;
-        });
-      }
-    });
-
-    // Fix for iOS viewport height issue
-    function setVH() {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    
-    setVH();
-    window.addEventListener('resize', setVH);
-    window.addEventListener('orientationchange', setVH);
+    hamburger.setAttribute("aria-expanded", "false");
+  }
+  // Garantir que o código execute mesmo se houver erros
+  window.onerror = function() {
+    console.log('Erro detectado, mas continuando execução...');
+    return true;
+  };
   </script>
 </body>
 </html>
