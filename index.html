@@ -47,7 +47,7 @@
       padding: 0 20px;
     }
 
-    /* WhatsApp Floating Button */
+    /* WhatsApp Floating Button - MODIFICADO */
     .whatsapp-float {
       position: fixed;
       bottom: 25px;
@@ -79,41 +79,57 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Mobile WhatsApp Button */
+    /* WhatsApp Button Text - SOMENTE DESKTOP */
+    .whatsapp-text {
+      position: absolute;
+      right: 70px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #25D366;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
 
-.whatsapp-mobile {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
-  color: var(--white);
-  padding: 15px 25px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 4px 15px var(--shadow);
-  z-index: 1001; /* Aumentei para 1001 para ficar acima do menu */
-  width: 90%;
-  max-width: 300px;
-  text-align: center;
-  transition: var(--transition);
-}
+    .whatsapp-text::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -6px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 6px solid #25D366;
+    }
 
-.whatsapp-mobile:hover {
-  transform: translateX(-50%) translateY(-3px);
-  box-shadow: 0 6px 20px rgba(179, 0, 0, 0.3);
-}
+    .whatsapp-float:hover .whatsapp-text {
+      opacity: 1;
+      transform: translateY(-50%) translateX(-5px);
+    }
+
+    /* Mobile WhatsApp Button - REMOVIDO */
+    .whatsapp-mobile {
+      display: none;
+    }
 
     /* Navbar */
     @media (max-width: 768px) {
-  .hamburger {
-    display: block;
-    position: relative;
-    z-index: 1002; /* Aumentei para garantir que fique acima de tudo */
-  }
-}
+      .hamburger {
+        display: block;
+        position: relative;
+        z-index: 1002;
+      }
+    }
+    
     .navbar {
       position: fixed;
       top: 0;
@@ -172,7 +188,7 @@
       z-index: 1001;
     }
 
-    /* Mobile Navigation - REESTRUTURADO */
+    /* Mobile Navigation */
     .mobile-nav {
       position: fixed;
       top: 0;
@@ -217,13 +233,14 @@
     .mobile-nav a:hover {
       color: var(--primary-red);
     }
-.mobile-nav {
-  z-index: 2000 !important;
-}
+    
+    .mobile-nav {
+      z-index: 2000 !important;
+    }
 
-.hamburger {
-  z-index: 2001 !important;
-}
+    .hamburger {
+      z-index: 2001 !important;
+    }
 
     /* Hero Section */
     .hero {
@@ -377,12 +394,14 @@
       font-size: 1.3rem;
     }
 
-    /* Instagram Section */
+    /* Instagram Section - CARROSSEL */
     .instagram-section {
       background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
       padding: 80px 0;
       color: var(--white);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .instagram-title {
@@ -394,36 +413,41 @@
       background-color: var(--white);
     }
 
-    .instagram-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+    /* Carrossel Container */
+    .carousel-container {
       max-width: 1000px;
-      margin: 0 auto;
+      margin: 0 auto 40px;
+      position: relative;
+      padding: 0 50px;
     }
 
-    .instagram-item {
-      background-color: var(--white);
-      border-radius: 10px;
+    .carousel {
+      display: flex;
       overflow: hidden;
-      transition: var(--transition);
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
       position: relative;
       aspect-ratio: 1;
     }
 
-    .instagram-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .instagram-item img {
+    .carousel-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .instagram-overlay {
+    .carousel-overlay {
       position: absolute;
       top: 0;
       left: 0;
@@ -437,14 +461,67 @@
       transition: var(--transition);
     }
 
-    .instagram-item:hover .instagram-overlay {
+    .carousel-slide:hover .carousel-overlay {
       opacity: 1;
     }
 
-    .instagram-link {
+    .carousel-link {
       color: var(--white);
       font-size: 1.5rem;
       text-decoration: none;
+    }
+
+    /* Carrossel Controls */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .carousel-prev {
+      left: 0;
+    }
+
+    .carousel-next {
+      right: 0;
+    }
+
+    /* Carrossel Indicators */
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .carousel-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .carousel-indicator.active {
+      background-color: white;
     }
 
     .instagram-cta {
@@ -561,6 +638,10 @@
       .hero h2 {
         font-size: 1.3rem;
       }
+      
+      .whatsapp-text {
+        display: none; /* Remove texto no hover em tablets */
+      }
     }
 
     @media (max-width: 768px) {
@@ -607,20 +688,27 @@
         padding: 60px 0;
       }
 
+      /* WhatsApp Float Mobile - APENAS ÍCONE */
       .whatsapp-float {
-        display: none;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .whatsapp-text {
+        display: none; /* Remove completamente o texto em mobile */
       }
 
-      .whatsapp-mobile {
-        display: block;
+      .carousel-container {
+        padding: 0 40px;
       }
-
-      .instagram-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-item {
-        min-width: 100%;
+      
+      .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
       }
       
       .about-content {
@@ -631,7 +719,6 @@
         padding: 25px 20px;
       }
       
-      /* Ajustes do menu móvel para mobile */
       .mobile-nav a {
         font-size: 1.3rem;
         padding: 12px 0;
@@ -651,11 +738,10 @@
         padding: 20px 15px;
       }
 
-      .instagram-grid {
-        grid-template-columns: 1fr;
-        max-width: 300px;
+      .carousel-container {
+        padding: 0 30px;
       }
-
+      
       .footer-content {
         grid-template-columns: 1fr;
       }
@@ -674,6 +760,15 @@
         padding: 12px 25px;
         font-size: 0.9rem;
       }
+      
+      /* WhatsApp Float ainda menor em mobile muito pequeno */
+      .whatsapp-float {
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
+        bottom: 15px;
+        right: 15px;
+      }
     }
     
     @media (max-width: 360px) {
@@ -688,18 +783,18 @@
       .container {
         padding: 0 15px;
       }
+      
+      .carousel-container {
+        padding: 0 25px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- WhatsApp Floating Button -->
+  <!-- WhatsApp Floating Button - MODIFICADO -->
   <a href="https://wa.me/5554999981834" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp">
     <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- Mobile WhatsApp Button -->
-  <a href="https://wa.me/5554999981834" class="whatsapp-mobile" target="_blank" rel="noopener noreferrer">
-    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-text">Agendar Consulta</span>
   </a>
 
   <!-- Navbar -->
@@ -777,7 +872,7 @@
     </div>
   </section>
 
-  <!-- Instagram Section -->
+  <!-- Instagram Section - AGORA COM CARROSSEL -->
   <section id="instagram" class="instagram-section">
     <div class="container">
       <h2 class="section-title instagram-title">Nosso Instagram</h2>
@@ -785,42 +880,57 @@
         Acompanhe nosso trabalho!
       </p>
       
-      <!-- Instagram Gallery Placeholder -->
-      <div class="instagram-grid">
-        <div class="instagram-item">
-          <img src="imagens/maejessica.jpg" alt="Mãe Jéssica" loading="lazy">
-          <div class="instagram-overlay">
-            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
+      <!-- Carrossel -->
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <img src="imagens/maejessica.jpg" alt="Mãe Jéssica" loading="lazy">
+              <div class="carousel-overlay">
+                <a href="https://www.instagram.com/maejessica.deoya/" class="carousel-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+            
+            <div class="carousel-slide">
+              <img src="imagens/batuqueoya2025.jpg" alt="Batuque mãe Oya 2025" loading="lazy">
+              <div class="carousel-overlay">
+                <a href="https://www.instagram.com/maejessica.deoya/" class="carousel-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+            
+            <div class="carousel-slide">
+              <img src="imagens/oya.jpg" alt="Ambiente espiritual" loading="lazy">
+              <div class="carousel-overlay">
+                <a href="https://www.instagram.com/maejessica.deoya/" class="carousel-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+            
+            <div class="carousel-slide">
+              <img src="imagens/setesaias.jpg" alt="sete saias" loading="lazy">
+              <div class="carousel-overlay">
+                <a href="https://www.instagram.com/maejessica.deoya/" class="carousel-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         
-        <div class="instagram-item">
-          <img src="imagens/batuqueoya2025.jpg" alt="Batuque mãe Oya 2025" loading="lazy">
-          <div class="instagram-overlay">
-            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
-        </div>
+        <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Imagem anterior">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Próxima imagem">
+          <i class="fas fa-chevron-right"></i>
+        </button>
         
-        <div class="instagram-item">
-          <img src="imagens/oya.jpg" alt="Ambiente espiritual" loading="lazy">
-          <div class="instagram-overlay">
-            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
-        </div>
-        
-        <div class="instagram-item">
-          <img src="imagens/setesaias.jpg" alt="sete saias" loading="lazy">
-          <div class="instagram-overlay">
-            <a href="https://www.instagram.com/maejessica.deoya/" class="instagram-link" target="_blank" rel="noopener noreferrer" aria-label="Ver no Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
+        <div class="carousel-indicators" id="carouselIndicators">
+          <!-- Indicators serão gerados via JavaScript -->
         </div>
       </div>
       
@@ -898,7 +1008,9 @@
       </div>
     </div>
   </footer>
+
 <script>
+  // Menu Mobile
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
 
@@ -918,7 +1030,7 @@
     document.body.style.overflow = 'auto';
   }
 
-  // Fecha menu ao clicar fora dele (opcional mas profissional)
+  // Fecha menu ao clicar fora dele
   mobileNav.addEventListener('click', (e) => {
     if (e.target === mobileNav) {
       closeMenu();
@@ -926,9 +1038,97 @@
   });
 
   window.closeMenu = closeMenu;
+
+  // Carrossel JavaScript
+  document.addEventListener('DOMContentLoaded', function() {
+    const track = document.getElementById('carouselTrack');
+    const slides = Array.from(track.children);
+    const nextButton = document.getElementById('carouselNext');
+    const prevButton = document.getElementById('carouselPrev');
+    const indicatorsContainer = document.getElementById('carouselIndicators');
+    
+    let currentSlide = 0;
+    const slideCount = slides.length;
+    
+    // Criar indicadores
+    slides.forEach((_, index) => {
+      const indicator = document.createElement('div');
+      indicator.classList.add('carousel-indicator');
+      if (index === 0) indicator.classList.add('active');
+      indicator.addEventListener('click', () => goToSlide(index));
+      indicatorsContainer.appendChild(indicator);
+    });
+    
+    const indicators = Array.from(indicatorsContainer.children);
+    
+    // Função para mover o carrossel
+    function goToSlide(slideIndex) {
+      // Atualizar slide atual
+      currentSlide = slideIndex;
+      
+      // Mover o track
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Atualizar indicadores
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+      });
+    }
+    
+    // Função para próximo slide
+    function nextSlide() {
+      let newSlide = currentSlide + 1;
+      if (newSlide >= slideCount) newSlide = 0;
+      goToSlide(newSlide);
+    }
+    
+    // Função para slide anterior
+    function prevSlide() {
+      let newSlide = currentSlide - 1;
+      if (newSlide < 0) newSlide = slideCount - 1;
+      goToSlide(newSlide);
+    }
+    
+    // Event listeners para botões
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+    
+    // Auto-play (opcional)
+    let carouselInterval = setInterval(nextSlide, 5000);
+    
+    // Pausar auto-play quando interagir
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => {
+      clearInterval(carouselInterval);
+    });
+    
+    carouselContainer.addEventListener('mouseleave', () => {
+      carouselInterval = setInterval(nextSlide, 5000);
+    });
+    
+    // Suporte para touch (mobile)
+    let startX = 0;
+    let endX = 0;
+    
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      clearInterval(carouselInterval);
+    });
+    
+    track.addEventListener('touchmove', (e) => {
+      endX = e.touches[0].clientX;
+    });
+    
+    track.addEventListener('touchend', () => {
+      const threshold = 50;
+      if (startX - endX > threshold) {
+        nextSlide();
+      } else if (endX - startX > threshold) {
+        prevSlide();
+      }
+      carouselInterval = setInterval(nextSlide, 5000);
+    });
+  });
 </script>
 </body>
 </html>
-
-
-
