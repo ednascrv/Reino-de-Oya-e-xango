@@ -80,26 +80,40 @@
     }
 
     /* Mobile WhatsApp Button */
-    .whatsapp-mobile {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
-      color: var(--white);
-      padding: 15px 25px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 15px var(--shadow);
-      z-index: 1000;
-      width: 90%;
-      max-width: 300px;
-      text-align: center;
-    }
+
+.whatsapp-mobile {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
+  color: var(--white);
+  padding: 15px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 15px var(--shadow);
+  z-index: 1001; /* Aumentei para 1001 para ficar acima do menu */
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.whatsapp-mobile:hover {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 6px 20px rgba(179, 0, 0, 0.3);
+}
 
     /* Navbar */
+    @media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    position: relative;
+    z-index: 1002; /* Aumentei para garantir que fique acima de tudo */
+  }
+}
     .navbar {
       position: fixed;
       top: 0;
@@ -203,6 +217,13 @@
     .mobile-nav a:hover {
       color: var(--primary-red);
     }
+.mobile-nav {
+  z-index: 2000 !important;
+}
+
+.hamburger {
+  z-index: 2001 !important;
+}
 
     /* Hero Section */
     .hero {
@@ -877,44 +898,35 @@
       </div>
     </div>
   </footer>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
 
-  <script>
-    <script>
-  const hamburger = document.getElementById("hamburger");
-  const mobileNav = document.getElementById("mobileNav");
+  // Abrir e fechar menu
+  hamburger.addEventListener('click', () => {
+    const isActive = mobileNav.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isActive);
 
-  // Abrir e fechar o menu
-  hamburger.addEventListener("click", function () {
-    mobileNav.classList.toggle("active");
+    // Tira scroll da página enquanto menu está aberto
+    document.body.style.overflow = isActive ? 'hidden' : 'auto';
+  });
 
-    // Troca o ícone entre bars e x
-    const icon = this.querySelector("i");
-    if (mobileNav.classList.contains("active")) {
-      icon.classList.remove("fa-bars");
-      icon.classList.add("fa-times");
-      this.setAttribute("aria-expanded", "true");
-    } else {
-      icon.classList.remove("fa-times");
-      icon.classList.add("fa-bars");
-      this.setAttribute("aria-expanded", "false");
+  // Fechar menu ao clicar nos links
+  function closeMenu() {
+    mobileNav.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Fecha menu ao clicar fora dele (opcional mas profissional)
+  mobileNav.addEventListener('click', (e) => {
+    if (e.target === mobileNav) {
+      closeMenu();
     }
   });
 
-  // Fechar menu ao clicar em um link
-  function closeMenu() {
-    mobileNav.classList.remove("active");
-
-    const icon = hamburger.querySelector("i");
-    icon.classList.remove("fa-times");
-    icon.classList.add("fa-bars");
-
-    hamburger.setAttribute("aria-expanded", "false");
-  }
-  // Garantir que o código execute mesmo se houver erros
-  window.onerror = function() {
-    console.log('Erro detectado, mas continuando execução...');
-    return true;
-  };
-  </script>
+  window.closeMenu = closeMenu;
+</script>
 </body>
 </html>
+
